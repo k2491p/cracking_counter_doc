@@ -1,0 +1,16 @@
+@startuml
+
+object "ユーザー : User" as user
+object "骨ポキ登録 : RegisterCracking" as register_cracking
+object "骨ポキ : Cracking" as cracking
+object "骨ポキ対象 : CrackingObject" as cracking_object
+object "骨ポキ表示設定 : CrackingDisplaySettings" as cracking_display_settings
+
+user *-> register_cracking
+register_cracking <-* cracking
+cracking <--* cracking_object
+cracking_display_settings <-* cracking_object
+user --> cracking_display_settings
+
+
+@enduml
