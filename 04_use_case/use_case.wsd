@@ -1,0 +1,16 @@
+@startuml
+left to right direction
+
+actor User
+
+rectangle ユースケース {
+	usecase "骨ポキの登録をする" as register
+	usecase "骨ポキの回数を見る" as display
+	usecase "骨ポキ表示・表示の設定をする" as settings
+}
+
+User --> register
+User --> display
+User --> settings
+
+@enduml
