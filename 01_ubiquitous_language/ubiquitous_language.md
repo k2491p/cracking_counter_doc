@@ -6,3 +6,4 @@
 | 骨ポキ対象     | CrackingObject          | 骨ポキをする対象。首とか指とか。                     |
 | 骨ポキ登録     | RegisterCracking        | 骨ポキをアプリに登録すること。                       |
 | 骨ポキ表示設定 | CrackingDisplaySettings | ユーザーごとに骨ポキ対象の表示・表示を設定すること。 |
+| 骨ポキ閲覧     | DisplayCracking         | 骨ポキ情報表示すること。                             |
