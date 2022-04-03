@@ -1,0 +1,71 @@
+@startuml hoge
+
+package domain {
+    package User {
+        class UserEntity {
+            Id: Guid
+            +GetMe()
+            +Create()
+        }
+
+        interface IUserRepository {
+            +GetMe()
+            +Save()
+        }
+
+        class DisplaySettings {
+            BodyPartId: Guid
+            Display: Boolean
+        }
+    }
+
+    package Cracking {
+        class BodyPartEntity {
+            Id: Guid
+            Name: BodyPartName
+            +ChangeName(BodyPartName name)
+        }
+        class BodyPartName {
+            Value: String
+        }
+        class Count {
+            +Value: int
+            +Increase()
+        }
+        class CrackingCounterEntity {
+            Id: Guid
+            BodyPart: BodyPart
+            Count: Count
+            +Save()
+        }
+        class CrackingCounters {
+            CrackingCounters: List<CrackingCounterEntity>
+            +Create()
+        }
+        interface ICrackingCounter {
+            +Save(Guid id)
+        }
+        class CrackingService {
+            +GetHourly(DateTime day)
+            +GetWeekly(DateTime startDay, DateTime endDay)
+            +GetMonthly(DateTime month)
+            +GetYearly(DateTime year)
+            +GetTotal(Guid id)
+            +GetToday(Guid id)
+        }
+    }
+    
+}
+
+UserEntity *-- DisplaySettings
+UserEntity - IUserRepository
+BodyPartEntity - DisplaySettings
+BodyPartName - BodyPartEntity
+CrackingCounterEntity - Count
+CrackingCounters *-- CrackingCounterEntity
+CrackingCounterEntity -- BodyPartEntity
+ICrackingCounter - CrackingCounterEntity
+CrackingService - CrackingCounters
+
+
+@enduml
