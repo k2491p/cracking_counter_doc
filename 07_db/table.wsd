@@ -1,0 +1,36 @@
+@startuml hoge
+
+entity user {
+    + id uuid [PK]
+    --
+}
+
+entity display_settings {
+    + id uuid [PK]
+    --
+    - user_id uuid [FK]
+    - body_part_id uuid [FK]
+    display Boolean
+}
+
+entity body_part {
+    + id uuid [PK]
+    --
+    name varchar(255)
+}
+
+entity cracking {
+    + id uuid [PK]
+    --
+    - user_id uuid [FK]
+    - body_part_id uuid [FK]
+    count int(2)
+    register_date datetime
+}
+
+user --{ display_settings
+body_part -{ display_settings
+cracking }- user
+cracking }-- body_part
+
+@enduml
