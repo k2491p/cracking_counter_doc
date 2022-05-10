@@ -19,6 +19,13 @@ entity body_part {
     name varchar(255)
 }
 
+entity body_part_tree {
+    + id uuid [PK]
+    --
+    - ancestor_body_part_id [FK]
+    - descendent_body_part_id [FK]
+}
+
 entity cracking {
     + id uuid [PK]
     --
@@ -30,6 +37,7 @@ entity cracking {
 
 user --{ display_settings
 body_part -{ display_settings
+body_part_tree -{ body_part
 cracking }- user
 cracking }-- body_part
 
