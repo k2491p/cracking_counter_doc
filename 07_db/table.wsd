@@ -26,7 +26,7 @@ entity body_part_tree {
     - descendent_body_part_id [FK]
 }
 
-entity cracking {
+entity cracking_history {
     + id uuid [PK]
     --
     - user_id uuid [FK]
@@ -35,10 +35,20 @@ entity cracking {
     register_date datetime
 }
 
+entity cracking_view {
+    + id uuid [PK]
+    --
+    user_id uuid
+    body_part_id uuid
+    total_count int()
+    today_count int()
+     
+}
+
 user --{ display_settings
 body_part -{ display_settings
 body_part_tree -{ body_part
-cracking }- user
-cracking }-- body_part
+cracking_history }- user
+cracking_history }-- body_part
 
 @enduml
