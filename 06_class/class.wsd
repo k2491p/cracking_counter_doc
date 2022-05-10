@@ -30,22 +30,33 @@ package domain {
         }
         class Count {
             +Value: int
-            +Increase()
         }
         class CrackingCounterEntity {
             Id: Guid
+            UserId: Guid
             BodyPart: BodyPart
-            Count: Count
-            +Save()
+            TotalCount: Count
+            TodayCount: Count
+            Descendent:  List<CrackingCounterEntity>
+            +Increment()
         }
         class CrackingCounters {
             CrackingCounters: List<CrackingCounterEntity>
             +Create()
         }
-        interface ICrackingCounter {
-            +Save(Guid id)
+        interface ICrackingCounterRepository {
+            +Get(Guid id)
+            +GetAll()
+            +Save(CrackingCounterEntity entity)
         }
-        class CrackingService {
+    }
+    
+}
+
+package application {
+    class CrackingCounterService {
+            +GetCrackingCounters()
+            +Increment(Guid id)
             +GetHourly(DateTime day)
             +GetWeekly(DateTime startDay, DateTime endDay)
             +GetMonthly(DateTime month)
@@ -53,8 +64,14 @@ package domain {
             +GetTotal(Guid id)
             +GetToday(Guid id)
         }
+}
+
+package presentation {
+    class RegisterViewModel {
+        CrackingCounters: CrackingCounters
+        +Increment(Guid id)
+        -UpdateList()
     }
-    
 }
 
 UserEntity *-- DisplaySettings
@@ -64,8 +81,12 @@ BodyPartName - BodyPartEntity
 CrackingCounterEntity - Count
 CrackingCounters *-- CrackingCounterEntity
 CrackingCounterEntity -- BodyPartEntity
-ICrackingCounter - CrackingCounterEntity
-CrackingService - CrackingCounters
-
+ICrackingCounterRepository - CrackingCounterEntity
+CrackingCounterService - CrackingCounters
+RegisterViewModel -- CrackingCounters
+RegisterViewModel -- CrackingCounterService
+CrackingCounterService -- ICrackingCounterRepository
+CrackingCounters -- ICrackingCounterRepository
+CrackingCounterService -- CrackingCounterEntity
 
 @enduml
