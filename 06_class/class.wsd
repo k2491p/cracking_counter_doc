@@ -47,6 +47,26 @@ package domain {
             +GetAll()
             +Save(CrackingCounterEntity entity)
         }
+        class CrackingData {
+            Sum: Count
+            Average: Count
+            DateFrom: DataDate
+            DateTo: DataDate
+            Datas: List<IData>
+        }
+        class DailyCrackingData {
+        }
+        class WeeklyCrackingData {
+        }
+        class MonthlyCrackingData {
+        }
+        class YearlyCrackingData {
+        }
+        class DataDate {
+            +Value: DateTime
+            +DisplayFullValue: String
+            +DisplayDayValue: String
+        }
     }
     
 }
@@ -55,7 +75,7 @@ package application {
     class CrackingCounterService {
             +GetCrackingCounters()
             +Register(Guid id)
-            +GetHourly(DateTime day)
+            +GetDaily(DateTime day)
             +GetWeekly(DateTime startDay, DateTime endDay)
             +GetMonthly(DateTime month)
             +GetYearly(DateTime year)
@@ -77,7 +97,7 @@ package presentation {
         DateFrom: DataDate
         DateTo: DataDate
         Datas: List<IData>
-        +GetHourly()
+        +GetDaily()
         +GetWeekly()
         +GetMonthly()
         +GetYearly()
@@ -98,5 +118,10 @@ RegisterViewModel -- CrackingCounterService
 CrackingCounterService -- ICrackingCounterRepository
 CrackingCounters -- ICrackingCounterRepository
 CrackingCounterService -- CrackingCounterEntity
+CrackingData - DataDate
+CrackingData *--- DailyCrackingData
+CrackingData *--- WeeklyCrackingData
+CrackingData *--- MonthlyCrackingData
+CrackingData *--- YearlyCrackingData
 
 @enduml
