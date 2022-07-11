@@ -38,11 +38,9 @@ package domain {
             TotalCount: Count
             TodayCount: Count
             Descendent:  List<CrackingCounterEntity>
-            +Increment()
         }
         class CrackingCounters {
             CrackingCounters: List<CrackingCounterEntity>
-            +Create()
         }
         interface ICrackingCounterRepository {
             +Get(Guid id)
@@ -56,7 +54,7 @@ package domain {
 package application {
     class CrackingCounterService {
             +GetCrackingCounters()
-            +Increment(Guid id)
+            +Register(Guid id)
             +GetHourly(DateTime day)
             +GetWeekly(DateTime startDay, DateTime endDay)
             +GetMonthly(DateTime month)
@@ -69,8 +67,20 @@ package application {
 package presentation {
     class RegisterViewModel {
         CrackingCounters: CrackingCounters
-        +Increment(Guid id)
+        +Register(Guid id)
         -UpdateList()
+    }
+
+    class DataViewModel {
+        Sum: Count
+        Average: Count
+        DateFrom: DataDate
+        DateTo: DataDate
+        Datas: List<IData>
+        +GetHourly()
+        +GetWeekly()
+        +GetMonthly()
+        +GetYearly()
     }
 }
 
